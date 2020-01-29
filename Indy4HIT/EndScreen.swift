@@ -13,28 +13,40 @@ class EndScreen: SKScene {
     init(size: CGSize, didWin: Bool) {
         super.init(size: size)
         
+        let effect = SKEffectNode(fileNamed: "winEffect")
         let msg = didWin ? "You won the Game!" : "You lost the Game!"
         let text = SKLabelNode(fontNamed: "Arial")
         let restart = SKLabelNode(fontNamed: "Arial")
         let img = SKSpriteNode(imageNamed: "backArrow")
+        let playAgain = SKLabelNode(fontNamed: "Arial")
         
         text.text = msg
-        text.fontSize = 50
-        text.position = CGPoint(x: size.width / 2, y: size.height / 2)
+        text.fontSize = 80
+        text.position = CGPoint(x: size.width / 2, y: size.height / 2 * 1.5)
         text.fontColor = didWin ? SKColor.green : SKColor.red
         
         restart.text = "Back"
         restart.fontSize = 40
         restart.position = CGPoint(x: size.width / 2, y: size.height / 3)
         restart.name = "mainmenu"
-        
+         
         img.position = CGPoint(x: size.width / 2 - restart.fontSize * 4 / 2, y: restart.position.y + restart.frame.size.height / 2 - 1)
         img.size = CGSize(width: restart.frame.size.height, height: restart.frame.size.height)
         img.name = "arrow"
         
+        effect?.position = CGPoint(x: size.width / 2, y: 0.0)
+        effect?.zPosition = -9999
+        effect?.position.y = size.height / 2 - size.height
+        
+        playAgain.text = "Play Again"
+        playAgain.fontSize = 40
+        playAgain.position = CGPoint(x: size.width / 2, y: size.height / 2)
+        
+        addChild(effect!)
         addChild(img)
         addChild(text)
         addChild(restart)
+        addChild(playAgain)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
