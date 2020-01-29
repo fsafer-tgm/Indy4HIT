@@ -6,7 +6,7 @@
 //  Copyright © 2020 Florian Safer. All rights reserved.
 //
 
-import SpriteKit
+import SpriteKitt
 
 class MainMenu: SKScene {
     override func didMove(to view: SKView) {
