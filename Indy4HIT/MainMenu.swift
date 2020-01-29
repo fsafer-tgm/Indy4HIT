@@ -10,8 +10,6 @@ import SpriteKit
 
 class MainMenu: SKScene {
     override func didMove(to view: SKView) {
-        backgroundColor = SKColor.black
-        
         let startGame = SKLabelNode(fontNamed: "Arial")
         let newgame = SKLabelNode(fontNamed: "Arial")
         let toplist = SKLabelNode(fontNamed: "Arial")
@@ -19,7 +17,7 @@ class MainMenu: SKScene {
         startGame.text = "Continue Game"
         startGame.fontSize = 30
         startGame.position = CGPoint(x: size.width / 2, y: size.height / 1.5)
-        startGame.color = SKColor.white
+        startGame.name = "contgame"
         
         newgame.text = "New Game"
         newgame.fontSize = 30
@@ -29,6 +27,7 @@ class MainMenu: SKScene {
         toplist.text = "Top List"
         toplist.fontSize = 30
         toplist.position = CGPoint(x: size.width / 2, y: size.height / 3)
+        toplist.name = "toplist"
         
         addChild(startGame)
         addChild(newgame)
@@ -44,9 +43,13 @@ class MainMenu: SKScene {
         case "newgame":
             run(SKAction.run {
                 let trans = SKTransition.flipVertical(withDuration: 0.5)
-                let s = GameScene(size: self.size, selected: 0)
+                let s = SubMainMenu(size: self.size)
                 self.view?.presentScene(s, transition: trans)
             })
+        case "toplist":
+            break
+        case "contgame":
+            break
         default:
             break
         }
