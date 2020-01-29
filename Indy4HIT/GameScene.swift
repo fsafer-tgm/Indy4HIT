@@ -53,21 +53,38 @@ class GameScene: SKScene {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touches = touches.first
         let touchLocation = touches?.location(in: self)
+        
+        if gamemode == modeStruct.easy {
+            var tmpX = wiese.size.width/3
+            var tmpY = wiese.size.height/3
+        }
     }
     
-    func calcField(){
+    func setKnochen(){
         if gamemode == modeStruct.easy{
             let knochenX = Int(random(min: 0, max: 2))
             let knochenY = Int(random(min: 0, max: 2))
             
             field[knochenX][knochenY] = SKSpriteNode(imageNamed: "Knochen")
-            }
             
+        }else  if gamemode == modeStruct.medium{
+            let knochenX = Int(random(min: 0, max: 4))
+            let knochenY = Int(random(min: 0, max: 4))
+                   
+            field[knochenX][knochenY] = SKSpriteNode(imageNamed: "Knochen")
+                   
+        }else  if gamemode == modeStruct.hard{
+            let knochenX = Int(random(min: 0, max: 6))
+            let knochenY = Int(random(min: 0, max: 6))
+                   
+            field[knochenX][knochenY] = SKSpriteNode(imageNamed: "Knochen")
+                   
         }
+
     }
     
     func random(min: CGFloat, max: CGFloat) -> CGFloat {
       return CGFloat.random(in: min..<max)
     }
-
+}
 
