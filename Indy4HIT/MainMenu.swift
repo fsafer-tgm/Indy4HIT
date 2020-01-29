@@ -65,7 +65,7 @@ class MainMenu: SKScene {
         case "toplist":
             run(SKAction.run {
                 let trans = SKTransition.flipVertical(withDuration: 0.5)
-                let s = EndScreen(size: self.size, didWin: true)
+                let s = EndScreen(size: self.size, didWin: false)
                 self.view?.presentScene(s, transition: trans)
             })
         case "contgame":

@@ -14,6 +14,7 @@ class SubMainMenu: SKScene {
         let small = SKLabelNode(fontNamed: "Arial")
         let medium = SKLabelNode(fontNamed: "Arial")
         let large = SKLabelNode(fontNamed: "Arial")
+        let img = SKSpriteNode(imageNamed: "backArrow")
         
         small.text = "Small Map"
         small.position = CGPoint(x: size.width / 2, y: size.height / 1.5)
@@ -27,9 +28,14 @@ class SubMainMenu: SKScene {
         large.position = CGPoint(x: size.width / 2, y: size.height / 3)
         large.name = "large"
         
+        img.position = CGPoint(x: size.width / (size.width / 40) , y: size.height / 2)
+        img.size = CGSize(width: size.height / 8, height: size.height / 8)
+        img.name = "back"
+        
         addChild(small)
         addChild(medium)
         addChild(large)
+        addChild(img)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -58,6 +64,12 @@ class SubMainMenu: SKScene {
             run(SKAction.run {
                 let trans = SKTransition.flipHorizontal(withDuration: 0.5)
                 let s = GameScene(size: self.size, selected: 2)
+                self.view?.presentScene(s, transition: trans)
+            })
+        case "back":
+            run(SKAction.run {
+                let trans = SKTransition.flipHorizontal(withDuration: 0.5)
+                let s = MainMenu(size: self.size)
                 self.view?.presentScene(s, transition: trans)
             })
         default:

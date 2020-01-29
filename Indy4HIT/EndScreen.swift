@@ -22,12 +22,12 @@ class EndScreen: SKScene {
         let playImg = SKSpriteNode(imageNamed: "playIcon")
         
         text.text = msg
-        text.fontSize = 80
+        text.fontSize = size.height / 5
         text.position = CGPoint(x: size.width / 2, y: size.height / 2 * 1.5)
         text.fontColor = didWin ? SKColor.green : SKColor.red
         
         restart.text = "Back"
-        restart.fontSize = 40
+        restart.fontSize = size.height / 10
         restart.position = CGPoint(x: size.width / 2, y: size.height / 3)
         restart.name = "mainmenu"
          
@@ -39,7 +39,7 @@ class EndScreen: SKScene {
         effect?.zPosition = -9999
         
         playAgain.text = "Play Again"
-        playAgain.fontSize = 40
+        playAgain.fontSize = size.height / 10
         playAgain.position = CGPoint(x: size.width / 2, y: size.height / 2)
         playAgain.name = "playAgain"
         
@@ -69,7 +69,7 @@ class EndScreen: SKScene {
             })
         case "arrow":
             run(SKAction.run {
-                let trans = SKTransition.flipVertical(withDuration: 0.5)
+                let trans = SKTransition.flipHorizontal(withDuration: 0.5)
                 let s = MainMenu(size: self.size)
                 self.view?.presentScene(s, transition: trans)
             })

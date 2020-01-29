@@ -26,11 +26,14 @@ class GameScene: SKScene {
     
     init(size: CGSize ,selected: Int) {
         super.init(size: size)
-        if selected == 0{
+        /**
+         Wäre mit Switch Case sinnvoller oder?
+         */
+        if selected == 0 {
             gamemode = modeStruct.easy
-        }else if selected == 1{
+        } else if selected == 1 {
             gamemode = modeStruct.medium
-        }else if selected == 2{
+        } else if selected == 2 {
             gamemode = modeStruct.hard
         }
     }
@@ -68,14 +71,14 @@ class GameScene: SKScene {
             let barrierLeft = self.knochenX * tmpX
             let barrierRight = (self.knochenX+1) * tmpX
             let barrierUnten = self.knochenY * tmpY
-            let barrierOben = (self.knochenY+1) * tmpY
+            let barrierOben = (self.knochenY + 1) * tmpY
             
             let move = SKAction.move(to: touchLocation!, duration: 1.0)
             indy.run(SKAction.sequence([move, SKAction.run({
                 if Int(touchLocation!.x) > barrierLeft && Int(touchLocation!.x) < barrierRight && Int(touchLocation!.y) > barrierUnten && Int(touchLocation!.y) < barrierOben{
                     
                     self.win()
-                }else{
+                } else {
                     let schrittZeiger = SKLabelNode()
                     let schritte = self.differenzBerechnen(touchX: touchLocation!.x, touchY: touchLocation!.y, squareLength: tmpX, squareWidth: tmpY)
                     
@@ -110,13 +113,13 @@ class GameScene: SKScene {
             
             field[knochenX][knochenY] = SKSpriteNode(imageNamed: "Knochen")
             
-        }else  if gamemode == modeStruct.medium{
+        } else if gamemode == modeStruct.medium{
             knochenX = Int(random(min: 0, max: 5))
             knochenY = Int(random(min: 0, max: 5))
                    
             field[knochenX][knochenY] = SKSpriteNode(imageNamed: "Knochen")
                    
-        }else  if gamemode == modeStruct.hard{
+        } else if gamemode == modeStruct.hard{
             knochenX = Int(random(min: 0, max: 7))
             knochenY = Int(random(min: 0, max: 7))
                    
