@@ -49,9 +49,17 @@ class SubMainMenu: SKScene {
                 self.view?.presentScene(s, transition: trans)
             })
         case "medium":
-            break
+            run(SKAction.run {
+                let trans = SKTransition.flipHorizontal(withDuration: 0.5)
+                let s = GameScene(size: self.size, selected: 1)
+                self.view?.presentScene(s, transition: trans)
+            })
         case "large":
-            break
+            run(SKAction.run {
+                let trans = SKTransition.flipHorizontal(withDuration: 0.5)
+                let s = GameScene(size: self.size, selected: 2)
+                self.view?.presentScene(s, transition: trans)
+            })
         default:
             break
         }

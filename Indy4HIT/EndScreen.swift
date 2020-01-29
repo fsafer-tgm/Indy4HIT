@@ -16,19 +16,23 @@ class EndScreen: SKScene {
         let msg = didWin ? "You won the Game!" : "You lost the Game!"
         let text = SKLabelNode(fontNamed: "Arial")
         let restart = SKLabelNode(fontNamed: "Arial")
-        backgroundColor = SKColor.black
-        
+        let img = SKSpriteNode(imageNamed: "backArrow")
         
         text.text = msg
-        text.color = SKColor.white
         text.fontSize = 50
         text.position = CGPoint(x: size.width / 2, y: size.height / 2)
+        text.fontColor = didWin ? SKColor.green : SKColor.red
         
-        restart.text = "Main Menu"
+        restart.text = "Back"
         restart.fontSize = 40
         restart.position = CGPoint(x: size.width / 2, y: size.height / 3)
         restart.name = "mainmenu"
         
+        img.position = CGPoint(x: size.width / 2 - restart.fontSize * 4 / 2, y: restart.position.y + restart.frame.size.height / 2 - 1)
+        img.size = CGSize(width: restart.frame.size.height, height: restart.frame.size.height)
+        img.name = "arrow"
+        
+        addChild(img)
         addChild(text)
         addChild(restart)
     }
@@ -40,6 +44,12 @@ class EndScreen: SKScene {
         let touchNode = touchedNodes.first
         switch touchNode?.name {
         case "mainmenu":
+            run(SKAction.run {
+                let trans = SKTransition.flipVertical(withDuration: 0.5)
+                let s = MainMenu(size: self.size)
+                self.view?.presentScene(s, transition: trans)
+            })
+        case "arrow":
             run(SKAction.run {
                 let trans = SKTransition.flipVertical(withDuration: 0.5)
                 let s = MainMenu(size: self.size)

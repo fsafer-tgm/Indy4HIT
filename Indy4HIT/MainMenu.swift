@@ -47,7 +47,11 @@ class MainMenu: SKScene {
                 self.view?.presentScene(s, transition: trans)
             })
         case "toplist":
-            break
+            run(SKAction.run {
+                let trans = SKTransition.flipVertical(withDuration: 0.5)
+                let s = EndScreen(size: self.size, didWin: true)
+                self.view?.presentScene(s, transition: trans)
+            })
         case "contgame":
             break
         default:
