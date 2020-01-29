@@ -13,7 +13,7 @@ import GameplayKit
 class GameViewController: UIViewController {
 
     override func viewDidLoad() {
-        let scene = EndScreen(size: view.bounds.size, didWin: true)
+        let scene = MainMenu(size: view.bounds.size)
         let skView = view as! SKView
         skView.showsFPS = true
         skView.showsNodeCount = true
@@ -21,6 +21,4 @@ class GameViewController: UIViewController {
         scene.scaleMode = .resizeFill
         skView.presentScene(scene)
     }
-
-
 }
