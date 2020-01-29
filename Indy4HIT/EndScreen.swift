@@ -40,7 +40,6 @@ class EndScreen: SKScene {
         let touchNode = touchedNodes.first
         switch touchNode?.name {
         case "mainmenu":
-            print("mainmenu")
             run(SKAction.run {
                 let trans = SKTransition.flipVertical(withDuration: 0.5)
                 let s = MainMenu(size: self.size)
