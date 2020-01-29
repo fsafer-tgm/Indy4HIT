@@ -13,6 +13,8 @@ class MainMenu: SKScene {
         let startGame = SKLabelNode(fontNamed: "Arial")
         let newgame = SKLabelNode(fontNamed: "Arial")
         let toplist = SKLabelNode(fontNamed: "Arial")
+        let effect1 = SKEffectNode(fileNamed: "winEffect")
+        let effect2 = SKEffectNode(fileNamed: "winEffect")
         
         startGame.text = "Continue Game"
         startGame.fontSize = 30
@@ -29,9 +31,16 @@ class MainMenu: SKScene {
         toplist.position = CGPoint(x: size.width / 2, y: size.height / 3)
         toplist.name = "toplist"
         
+        effect1?.zPosition = -9999
+        effect2?.zPosition = -9999
+        effect1?.position = CGPoint(x: size.width / 2 - size.width / 1.8, y: size.height / 2 - size.height)
+        effect2?.position = CGPoint(x: size.width / 2 + size.width / 1.8, y: size.height / 2 - size.height)
+        
         addChild(startGame)
         addChild(newgame)
         addChild(toplist)
+        addChild(effect1!)
+        addChild(effect2!)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

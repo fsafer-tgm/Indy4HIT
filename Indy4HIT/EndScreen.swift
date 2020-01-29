@@ -34,13 +34,13 @@ class EndScreen: SKScene {
         img.size = CGSize(width: restart.frame.size.height, height: restart.frame.size.height)
         img.name = "arrow"
         
-        effect?.position = CGPoint(x: size.width / 2, y: 0.0)
+        effect?.position = CGPoint(x: size.width / 2, y: size.height / 2 - size.height)
         effect?.zPosition = -9999
-        effect?.position.y = size.height / 2 - size.height
         
         playAgain.text = "Play Again"
         playAgain.fontSize = 40
         playAgain.position = CGPoint(x: size.width / 2, y: size.height / 2)
+        playAgain.name = "playAgain"
         
         addChild(effect!)
         addChild(img)
@@ -65,6 +65,12 @@ class EndScreen: SKScene {
             run(SKAction.run {
                 let trans = SKTransition.flipVertical(withDuration: 0.5)
                 let s = MainMenu(size: self.size)
+                self.view?.presentScene(s, transition: trans)
+            })
+        case "playAgain":
+            run(SKAction.run {
+                let trans = SKTransition.flipVertical(withDuration: 0.5)
+                let s = SubMainMenu(size: self.size)
                 self.view?.presentScene(s, transition: trans)
             })
         default:
