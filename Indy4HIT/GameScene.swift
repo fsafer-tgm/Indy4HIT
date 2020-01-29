@@ -57,6 +57,11 @@ class GameScene: SKScene {
     
     func calcField(){
         if gamemode == modeStruct.easy{
+            let knochenX = Int(random(min: 0, max: 2))
+            let knochenY = Int(random(min: 0, max: 2))
+            
+            field[knochenX][knochenY] = SKSpriteNode(imageNamed: "Knochen")
+            }
             
         }
     }
@@ -64,4 +69,5 @@ class GameScene: SKScene {
     func random(min: CGFloat, max: CGFloat) -> CGFloat {
       return CGFloat.random(in: min..<max)
     }
-}
+
+
