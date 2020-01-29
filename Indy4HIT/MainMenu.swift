@@ -16,6 +16,9 @@ class MainMenu: SKScene {
         let effect1 = SKEffectNode(fileNamed: "winEffect")
         let effect2 = SKEffectNode(fileNamed: "winEffect")
         let indy = SKSpriteNode(imageNamed: "Indy")
+        let winLabel = SKLabelNode(fontNamed: "Arial")
+        let speicher = UserDefaults.standard
+        let wins = speicher.integer(forKey: "wins")
         
         indy.name = "indyImg"
         indy.zPosition = -9999
@@ -42,12 +45,18 @@ class MainMenu: SKScene {
         effect1?.position = CGPoint(x: size.width / 2 - size.width / 1.8, y: size.height / 2 - size.height)
         effect2?.position = CGPoint(x: size.width / 2 + size.width / 1.8, y: size.height / 2 - size.height)
         
+        winLabel.text = "Wins: \(wins)"
+        winLabel.fontSize = size.height / 16
+        winLabel.name = "winlabel"
+        winLabel.position = CGPoint(x: size.width - size.height / 6, y: size.height - size.height / 13)
+        
         addChild(startGame)
         addChild(newgame)
         addChild(toplist)
         addChild(effect1!)
         addChild(effect2!)
         addChild(indy)
+        addChild(winLabel)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

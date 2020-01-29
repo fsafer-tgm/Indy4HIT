@@ -15,6 +15,9 @@ class SubMainMenu: SKScene {
         let medium = SKLabelNode(fontNamed: "Arial")
         let large = SKLabelNode(fontNamed: "Arial")
         let img = SKSpriteNode(imageNamed: "backArrow")
+        let winLabel = SKLabelNode(fontNamed: "Arial")
+        let speicher = UserDefaults.standard
+        let wins = speicher.integer(forKey: "wins")
         
         small.text = "Small Map"
         small.position = CGPoint(x: size.width / 2, y: size.height / 1.5)
@@ -32,10 +35,16 @@ class SubMainMenu: SKScene {
         img.size = CGSize(width: size.height / 8, height: size.height / 8)
         img.name = "back"
         
+        winLabel.text = "Wins: \(wins)"
+        winLabel.fontSize = size.height / 16
+        winLabel.name = "winlabel"
+        winLabel.position = CGPoint(x: size.width - size.height / 6, y: size.height - size.height / 13)
+        
         addChild(small)
         addChild(medium)
         addChild(large)
         addChild(img)
+        addChild(winLabel)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -47,6 +56,7 @@ class SubMainMenu: SKScene {
         let touchloc = touch?.location(in: self)
         let touchNodes = self.nodes(at: touchloc!)
         let touchNode = touchNodes.first
+        
         switch touchNode?.name {
         case "small":
             run(SKAction.run {

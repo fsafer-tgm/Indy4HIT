@@ -20,6 +20,9 @@ class EndScreen: SKScene {
         let img = SKSpriteNode(imageNamed: "backArrow")
         let playAgain = SKLabelNode(fontNamed: "Arial")
         let playImg = SKSpriteNode(imageNamed: "playIcon")
+        let winLabel = SKLabelNode(fontNamed: "Arial")
+        let speicher = UserDefaults.standard
+        let wins = speicher.integer(forKey: "wins")
         
         text.text = msg
         text.fontSize = size.height / 5
@@ -47,12 +50,18 @@ class EndScreen: SKScene {
         playImg.size = CGSize(width: playAgain.frame.size.height, height: playAgain.frame.size.height)
         playImg.name = "playButton"
         
+        winLabel.text = "Wins: \(wins)"
+        winLabel.fontSize = size.height / 16
+        winLabel.name = "winlabel"
+        winLabel.position = CGPoint(x: size.width - size.height / 6, y: size.height - size.height / 13)
+        
         addChild(playImg)
         addChild(effect!)
         addChild(img)
         addChild(text)
         addChild(restart)
         addChild(playAgain)
+        addChild(winLabel)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

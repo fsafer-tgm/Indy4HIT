@@ -23,6 +23,7 @@ class GameScene: SKScene {
     var field = [[SKSpriteNode]]()
     var knochenX = -1
     var knochenY = -1
+    let speicher = UserDefaults.standard
     
     init(size: CGSize ,selected: Int) {
         super.init(size: size)
@@ -137,6 +138,7 @@ class GameScene: SKScene {
         let transition = SKTransition.flipHorizontal(withDuration: 0.5)
         let endScreen = EndScreen(size: size, didWin: true)
         view?.presentScene(endScreen, transition: transition)
+        speicher.set(speicher.integer(forKey: "wins") + 1, forKey: "wins")
     }
     
     func differenzBerechnen(touchX: CGFloat, touchY: CGFloat, squareLength: Int, squareWidth: Int) -> Int{
