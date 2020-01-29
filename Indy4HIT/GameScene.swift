@@ -22,6 +22,8 @@ class GameScene: SKScene {
     var wiese = SKSpriteNode()
     var gamemode = -1
     var field = [[SKSpriteNode]]()
+    var knochenX = -1
+    var knochenY = -1
     
     init(size: CGSize ,selected: Int) {
         super.init(size: size)
@@ -40,42 +42,65 @@ class GameScene: SKScene {
     
     
     override func didMove(to view: SKView) {
-        wiese = SKSpriteNode(color: SKColor(displayP3Red: 34/255, green: 139/255, blue: 34/255, alpha: 1), size: CGSize(width: self.size.width-100, height: self.size.height))
-        wiese.position = CGPoint(x: 100+wiese.size.width/2, y: 0+wiese.size.height/2)
+        wiese = SKSpriteNode(color: SKColor(displayP3Red: 34/255, green: 139/255, blue: 34/255, alpha: 1), size: CGSize(width: self.size.width, height: self.size.height))
+        wiese.position = CGPoint(x: wiese.size.width/2, y: wiese.size.height/2)
         indy.position = CGPoint(x: 100.0, y: 100.0)
         indy.size = CGSize(width: 30, height: 30)
         wiese.addChild(indy)
         self.addChild(wiese)
         
+        field = Array<Array>(repeating: Array<SKSpriteNode>(repeating: SKSpriteNode(), count: 3), count: 3)
+        
+        setKnochen()
+        
     }
     
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("Ich bin in Touch")
         let touches = touches.first
         let touchLocation = touches?.location(in: self)
+        print(touchLocation)
         
         if gamemode == modeStruct.easy {
-            var tmpX = wiese.size.width/3
-            var tmpY = wiese.size.height/3
+            let tmpX:Int = Int(wiese.size.width/3)
+            let tmpY:Int = Int(wiese.size.height/3)
+            
+            
+            let barrierLeft = self.knochenX * tmpX
+            let barrierRight = (self.knochenX+1) * tmpX
+            let barrierUnten = self.knochenY * tmpY
+            let barrierOben = (self.knochenY+1) * tmpY
+            
+            print(barrierLeft, barrierRight, barrierUnten, barrierOben)
+            
+            if Int(touchLocation!.x) > barrierLeft && Int(touchLocation!.x) < barrierRight {
+                if Int(touchLocation!.y) > barrierUnten && Int(touchLocation!.y) < barrierOben {
+                    win()
+                }
+            }
         }
     }
     
     func setKnochen(){
         if gamemode == modeStruct.easy{
-            let knochenX = Int(random(min: 0, max: 2))
-            let knochenY = Int(random(min: 0, max: 2))
+            knochenX = Int(random(min: 0, max: 2))
+            knochenY = Int(random(min: 0, max: 2))
+            
+            print(knochenX)
+            print(knochenY)
             
             field[knochenX][knochenY] = SKSpriteNode(imageNamed: "Knochen")
             
         }else  if gamemode == modeStruct.medium{
-            let knochenX = Int(random(min: 0, max: 4))
-            let knochenY = Int(random(min: 0, max: 4))
+            knochenX = Int(random(min: 0, max: 4))
+            knochenY = Int(random(min: 0, max: 4))
                    
             field[knochenX][knochenY] = SKSpriteNode(imageNamed: "Knochen")
                    
         }else  if gamemode == modeStruct.hard{
-            let knochenX = Int(random(min: 0, max: 6))
-            let knochenY = Int(random(min: 0, max: 6))
+            knochenX = Int(random(min: 0, max: 6))
+            knochenY = Int(random(min: 0, max: 6))
                    
             field[knochenX][knochenY] = SKSpriteNode(imageNamed: "Knochen")
                    
@@ -85,6 +110,12 @@ class GameScene: SKScene {
     
     func random(min: CGFloat, max: CGFloat) -> CGFloat {
       return CGFloat.random(in: min..<max)
+    }
+    
+    func win(){
+        let transition = SKTransition.flipHorizontal(withDuration: 0.5)
+        let endScreen = EndScreen(size: size, didWin: true)
+        view?.presentScene(endScreen, transition: transition)
     }
 }
 
