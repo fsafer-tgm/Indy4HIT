@@ -11,7 +11,6 @@ import SpriteKit
 import GameplayKit
 
 class GameViewController: UIViewController {
-
     override func viewDidLoad() {
         let scene = MainMenu(size: view.bounds.size)
         let skView = view as! SKView

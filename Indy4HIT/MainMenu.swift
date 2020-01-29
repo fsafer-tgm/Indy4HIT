@@ -15,19 +15,25 @@ class MainMenu: SKScene {
         let toplist = SKLabelNode(fontNamed: "Arial")
         let effect1 = SKEffectNode(fileNamed: "winEffect")
         let effect2 = SKEffectNode(fileNamed: "winEffect")
+        let indy = SKSpriteNode(imageNamed: "Indy")
+        
+        indy.name = "indyImg"
+        indy.zPosition = -9999
+        indy.position = CGPoint(x: size.width / 2, y: size.height / 2 + size.height / 3)
+        indy.size = CGSize(width: size.height / 5, height: size.height / 5)
         
         startGame.text = "Continue Game"
-        startGame.fontSize = 30
+        startGame.fontSize = size.height / 13
         startGame.position = CGPoint(x: size.width / 2, y: size.height / 1.5)
         startGame.name = "contgame"
         
         newgame.text = "New Game"
-        newgame.fontSize = 30
+        newgame.fontSize = size.height / 13
         newgame.position = CGPoint(x: size.width / 2, y: size.height / 2)
         newgame.name = "newgame"
         
         toplist.text = "Top List"
-        toplist.fontSize = 30
+        toplist.fontSize = size.height / 13
         toplist.position = CGPoint(x: size.width / 2, y: size.height / 3)
         toplist.name = "toplist"
         
@@ -41,6 +47,7 @@ class MainMenu: SKScene {
         addChild(toplist)
         addChild(effect1!)
         addChild(effect2!)
+        addChild(indy)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

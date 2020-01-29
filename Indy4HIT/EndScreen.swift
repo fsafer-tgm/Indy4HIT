@@ -19,6 +19,7 @@ class EndScreen: SKScene {
         let restart = SKLabelNode(fontNamed: "Arial")
         let img = SKSpriteNode(imageNamed: "backArrow")
         let playAgain = SKLabelNode(fontNamed: "Arial")
+        let playImg = SKSpriteNode(imageNamed: "playIcon")
         
         text.text = msg
         text.fontSize = 80
@@ -42,6 +43,11 @@ class EndScreen: SKScene {
         playAgain.position = CGPoint(x: size.width / 2, y: size.height / 2)
         playAgain.name = "playAgain"
         
+        playImg.position = CGPoint(x: size.width / 2 - playAgain.fontSize * 6.5 / 2, y: playAgain.position.y + playAgain.frame.size.height / 2 - 1)
+        playImg.size = CGSize(width: playAgain.frame.size.height, height: playAgain.frame.size.height)
+        playImg.name = "playButton"
+        
+        addChild(playImg)
         addChild(effect!)
         addChild(img)
         addChild(text)
@@ -68,6 +74,12 @@ class EndScreen: SKScene {
                 self.view?.presentScene(s, transition: trans)
             })
         case "playAgain":
+            run(SKAction.run {
+                let trans = SKTransition.flipVertical(withDuration: 0.5)
+                let s = SubMainMenu(size: self.size)
+                self.view?.presentScene(s, transition: trans)
+            })
+        case "playButton":
             run(SKAction.run {
                 let trans = SKTransition.flipVertical(withDuration: 0.5)
                 let s = SubMainMenu(size: self.size)

@@ -17,7 +17,6 @@ struct modeStruct {
 
 
 class GameScene: SKScene {
-    
     let indy = SKSpriteNode(imageNamed: "Indy")
     var wiese = SKSpriteNode()
     var gamemode = -1
