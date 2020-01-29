@@ -9,5 +9,7 @@
 import SpriteKit
 
 class MainMenu: SKScene {
-
+    func hasLoaded() {
+        let startGame = SKLabelNode(fontNamed: "Arial")
+    }
 }

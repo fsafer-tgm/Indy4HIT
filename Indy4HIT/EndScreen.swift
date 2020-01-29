@@ -9,14 +9,18 @@
 import SpriteKit
 
 class EndScreen: SKScene {
+    
     init(size: CGSize, didWin: Bool) {
         super.init(size: size)
         
         let msg = didWin ? "You won the Game!" : "You lost the Game!"
         let text = SKLabelNode(fontNamed: "Arial")
         let restart = SKLabelNode(fontNamed: "Arial")
+        backgroundColor = SKColor.black
+        
         
         text.text = msg
+        text.color = SKColor.white
         text.fontSize = 50
         text.position = CGPoint(x: size.width / 2, y: size.height / 2)
         
@@ -24,6 +28,9 @@ class EndScreen: SKScene {
         restart.fontSize = 40
         restart.position = CGPoint(x: size.width / 2, y: size.height / 3)
         restart.name = "mainmenu"
+        
+        addChild(text)
+        addChild(restart)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -35,7 +42,7 @@ class EndScreen: SKScene {
         case "mainmenu":
             SKAction.run {
                 let trans = SKTransition.flipVertical(withDuration: 0.5)
-                let s = MainMenu(size: size)
+                let s = MainMenu(size: self.size)
                 self.view?.presentScene(s, transition: trans)
             }
         default:
