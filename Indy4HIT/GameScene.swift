@@ -74,7 +74,7 @@ class GameScene: SKScene {
             let barrierUnten = self.knochenY * tmpY
             let barrierOben = (self.knochenY + 1) * tmpY
             
-            let move = SKAction.move(to: touchLocation!, duration: 1.0)
+            let move = SKAction.move(to: self.calcField(touchX: touchLocation!.x, touchY: touchLocation!.y, squareLength: tmpX, squareWidth: tmpY), duration: 1.0)
             indy.run(SKAction.sequence([move, SKAction.run({
                 if Int(touchLocation!.x) > barrierLeft && Int(touchLocation!.x) < barrierRight && Int(touchLocation!.y) > barrierUnten && Int(touchLocation!.y) < barrierOben{
                     
@@ -102,6 +102,15 @@ class GameScene: SKScene {
             })]))
             
         }
+    }
+    
+    func calcField(touchX: CGFloat, touchY: CGFloat, squareLength: Int, squareWidth: Int)->CGPoint{
+        let fieldX = Int(touchX)/squareLength
+        let fieldY = Int(touchY)/squareWidth
+        let moveX = Int(self.size.width)/3*fieldX+(Int(self.size.width)/3)/2
+        let moveY = Int(self.size.height)/3*fieldY+(Int(self.size.height)/3)/2
+        
+        return CGPoint(x: moveX, y: moveY)
     }
     
     func setKnochen(){
@@ -142,9 +151,10 @@ class GameScene: SKScene {
     }
     
     func differenzBerechnen(touchX: CGFloat, touchY: CGFloat, squareLength: Int, squareWidth: Int) -> Int{
+        print("Ich bin in der Berechnung")
         let fieldX = Int(touchX)/squareLength
         let fieldY = Int(touchY)/squareWidth
-        
+        print(abs((fieldX-knochenX)+(fieldY-knochenY)))
         return abs((fieldX-knochenX)+(fieldY-knochenY))
     }
 }
